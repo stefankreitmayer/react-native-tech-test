@@ -4,12 +4,17 @@ import { Drink } from "./types";
 
 type DrinkCardProps = {
   drink: Drink;
+  onSelectDrink: (drink: Drink) => void;
 };
 
-const DrinkCard: React.FC<DrinkCardProps> = ({ drink }) => {
+const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onSelectDrink }) => {
   return (
-    <TouchableOpacity key={drink.id}>
-      <View testID={`drink-item-${drink.id}`} style={styles.card}>
+    <TouchableOpacity
+      testID={`drink-item-${drink.id}`}
+      key={drink.id}
+      onPress={() => onSelectDrink(drink)}
+    >
+      <View style={styles.card}>
         <View style={styles.content}>
           <Image source={{ uri: drink.thumbnail }} style={styles.thumbnail} />
           <View style={styles.textContainer}>
