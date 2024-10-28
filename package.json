@@ -6,7 +6,10 @@
     "test": "jest",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "prepare": "husky",
+    "lint": "bun eslint './**/*.{ts,tsx}' --fix",
+    "format": "bun prettier --write './**/*.{ts,tsx,js,jsx,json,md}'"
   },
   "dependencies": {
     "expo": "~51.0.28",
@@ -19,7 +22,20 @@
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.8.0",
     "@types/react": "~18.2.45",
+    "@typescript-eslint/eslint-plugin": "^8.12.0",
+    "@typescript-eslint/parser": "^8.12.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^28.8.3",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-testing-library": "^6.4.0",
+    "husky": "^9.1.6",
     "jest": "^29.7.0",
+    "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },
