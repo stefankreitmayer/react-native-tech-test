@@ -1,19 +1,54 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
 import ListScreen from "./ListScreen";
+import { useFetchDrinks } from "./hooks/useFetchDrinks";
+
+jest.mock("./hooks/useFetchDrinks");
 
 describe("ListScreen Component", () => {
-  it("renders the header correctly", () => {
+  it("displays a loading message when fetching data", () => {
+    (useFetchDrinks as jest.Mock).mockReturnValue({
+      drinks: [],
+      loading: true,
+      error: null,
+    });
+
+    const { getByText } = render(<ListScreen />);
+
+    expect(getByText("Loading...")).toBeTruthy();
+  });
+
+  it("displays an error message when an error occurs", () => {
+    (useFetchDrinks as jest.Mock).mockReturnValue({
+      drinks: [],
+      loading: false,
+      error: "Failed to load drinks",
+    });
+
+    const { getByText } = render(<ListScreen />);
+
+    expect(getByText("Failed to load drinks")).toBeTruthy();
+  });
+
+  it("renders the list of drinks when data is successfully fetched", () => {
+    const drinks = [
+      { id: "1", name: "Coke" },
+      { id: "2", name: "Pepsi" },
+      { id: "3", name: "Fanta" },
+    ];
+
+    (useFetchDrinks as jest.Mock).mockReturnValue({
+      drinks,
+      loading: false,
+      error: null,
+    });
+
     const { getByText } = render(<ListScreen />);
 
     expect(getByText("Drinks")).toBeTruthy();
-  });
 
-  it("renders each drink item in the list", () => {
-    const { getByText } = render(<ListScreen />);
-
-    expect(getByText("1: Coke")).toBeTruthy();
-    expect(getByText("2: Pepsi")).toBeTruthy();
-    expect(getByText("3: Fanta")).toBeTruthy();
+    drinks.forEach((drink) => {
+      expect(getByText(`${drink.id}: ${drink.name}`)).toBeTruthy();
+    });
   });
 });
