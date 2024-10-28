@@ -1,12 +1,15 @@
 import React from "react";
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, View } from "react-native";
 
 import { Drink } from "./types";
 import { useFetchDrinks } from "./hooks/useFetchDrinks";
 
 const ListScreen: React.FC = () => {
   const renderItem = ({ item }: { item: Drink }) => (
-    <Text>{`${item.id}: ${item.name}`}</Text>
+    <View>
+      <Text>{item.id}</Text>
+      <Text>{item.name}</Text>
+    </View>
   );
 
   const { drinks, loading, error } = useFetchDrinks();

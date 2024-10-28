@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../api";
+import { API_BASE_URL, NUMBER_OF_ITEMS } from "../api";
 import { Drink } from "../types";
 
 const convertItemToDrink = (item: any): Drink => ({
@@ -20,7 +20,7 @@ const fetchAllDrinkIdsByFirstLetter = async (
   const response = await axios.get(
     `${API_BASE_URL}/search.php?f=${firstLetter}`,
   );
-  return response.data.drinks.map(convertItemToDrink);
+  return response.data.drinks.slice(0, NUMBER_OF_ITEMS).map(convertItemToDrink);
 };
 
 export const useFetchDrinks = (firstLetter: string = "d") => {

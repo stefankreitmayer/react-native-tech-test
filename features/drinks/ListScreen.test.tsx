@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
+import { render, screen } from "@testing-library/react-native";
 import ListScreen from "./ListScreen";
 import { useFetchDrinks } from "./hooks/useFetchDrinks";
 
@@ -48,7 +48,26 @@ describe("ListScreen Component", () => {
     expect(getByText("Drinks")).toBeTruthy();
 
     drinks.forEach((drink) => {
-      expect(getByText(`${drink.id}: ${drink.name}`)).toBeTruthy();
+      expect(getByText(drink.name)).toBeTruthy();
     });
+  });
+
+  it("limits the number of initial items shown", () => {
+    const drinks = Array.from({ length: 15 }, (_, i) => ({
+      id: `${i + 1}`,
+      name: "Test Drink",
+    }));
+
+    (useFetchDrinks as jest.Mock).mockReturnValue({
+      drinks,
+      loading: false,
+      error: null,
+    });
+
+    const { getByText } = render(<ListScreen />);
+
+    expect(getByText("Drinks")).toBeTruthy();
+    const mealItems = screen.getAllByText("Test Drink");
+    expect(mealItems).toHaveLength(10);
   });
 });
