@@ -1,17 +1,9 @@
 import React from "react";
-import { FlatList, Text, View } from "react-native";
-
-import { Drink } from "./types";
+import { FlatList, Text, StyleSheet } from "react-native";
 import { useFetchDrinks } from "./hooks/useFetchDrinks";
+import DrinkCard from "./DrinkCard";
 
 const ListScreen: React.FC = () => {
-  const renderItem = ({ item }: { item: Drink }) => (
-    <View>
-      <Text>{item.id}</Text>
-      <Text>{item.name}</Text>
-    </View>
-  );
-
   const { drinks, loading, error } = useFetchDrinks();
 
   if (loading) {
@@ -26,12 +18,23 @@ const ListScreen: React.FC = () => {
     <>
       <Text>Drinks</Text>
       <FlatList
+        style={styles.drinksList}
+        testID="drink-list"
         data={drinks}
-        renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <DrinkCard drink={item} />}
+        contentContainerStyle={{ paddingBottom: 16 }}
       />
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  drinksList: {
+    flex: 1,
+    width: "100%",
+    padding: 12,
+  },
+});
 
 export default ListScreen;

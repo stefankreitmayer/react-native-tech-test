@@ -5,6 +5,16 @@ import { useFetchDrinks } from "./hooks/useFetchDrinks";
 
 jest.mock("./hooks/useFetchDrinks");
 
+// Create an array of 15 drinks, enough to test the limit
+const drinks = Array.from({ length: 15 }, (_, i) => ({
+  id: `${i + 1}`,
+  name: `Test Drink ${i + 1}`,
+  thumbnail: "https://example.com/image.jpg",
+  category: "Test Category",
+  instructions: "Test instructions",
+  ingredients: ["Ingredient 1", "Ingredient 2"],
+}));
+
 describe("ListScreen Component", () => {
   it("displays a loading message when fetching data", () => {
     (useFetchDrinks as jest.Mock).mockReturnValue({
@@ -31,12 +41,6 @@ describe("ListScreen Component", () => {
   });
 
   it("renders the list of drinks when data is successfully fetched", () => {
-    const drinks = [
-      { id: "1", name: "Coke" },
-      { id: "2", name: "Pepsi" },
-      { id: "3", name: "Fanta" },
-    ];
-
     (useFetchDrinks as jest.Mock).mockReturnValue({
       drinks,
       loading: false,
@@ -47,17 +51,12 @@ describe("ListScreen Component", () => {
 
     expect(getByText("Drinks")).toBeTruthy();
 
-    drinks.forEach((drink) => {
+    drinks.slice(0, 10).forEach((drink) => {
       expect(getByText(drink.name)).toBeTruthy();
     });
   });
 
   it("limits the number of initial items shown", () => {
-    const drinks = Array.from({ length: 15 }, (_, i) => ({
-      id: `${i + 1}`,
-      name: "Test Drink",
-    }));
-
     (useFetchDrinks as jest.Mock).mockReturnValue({
       drinks,
       loading: false,
@@ -67,7 +66,13 @@ describe("ListScreen Component", () => {
     const { getByText } = render(<ListScreen />);
 
     expect(getByText("Drinks")).toBeTruthy();
-    const mealItems = screen.getAllByText("Test Drink");
-    expect(mealItems).toHaveLength(10);
+
+    // Only the first 10 drinks should be displayed
+    drinks.slice(0, 10).forEach((drink) => {
+      expect(getByText(drink.name)).toBeTruthy();
+    });
+
+    // The 11th drink should not be displayed
+    expect(screen.queryByText("Test Drink 11")).toBeNull();
   });
 });
