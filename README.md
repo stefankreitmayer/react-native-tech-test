@@ -4,12 +4,13 @@ This test is aimed at software developers with a background in React Native.
 
 ## Submitted solution
 
-
-|List screen|Details screen|
-|----|----|
-|![simulator_screenshot_176A7A7F-B2D6-490D-89E6-8ED6A317AB6F](https://github.com/user-attachments/assets/b8d0cebb-380e-450a-96b3-bf99c34e9f4c)|![simulator_screenshot_87EDF512-3AA2-4145-A7B3-294DFEBFA359](https://github.com/user-attachments/assets/6165cc6d-30f5-4f10-ac40-013b41853c24)|
+| List screen                                                                                                                                   | Details screen                                                                                                                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![simulator_screenshot_176A7A7F-B2D6-490D-89E6-8ED6A317AB6F](https://github.com/user-attachments/assets/b8d0cebb-380e-450a-96b3-bf99c34e9f4c) | ![simulator_screenshot_87EDF512-3AA2-4145-A7B3-294DFEBFA359](https://github.com/user-attachments/assets/6165cc6d-30f5-4f10-ac40-013b41853c24) |
 
 For a summary of the approach and intermediary screenshots please see the [closed issues](https://github.com/stefankreitmayer/react-native-tech-test/issues?q=is%3Aissue+is%3Aclosed).
+
+Given more time, I would have considered various improvements, see [open issues](https://github.com/stefankreitmayer/react-native-tech-test/issues).
 
 ### Installation
 
@@ -50,7 +51,7 @@ To clear the Jest cache before running the tests:
 
 original README below
 
-***
+---
 
 ## Setup
 
