@@ -11,6 +11,7 @@ describe("DrinkDetailScreen", () => {
     instructions: "Step 1: Do this.\nStep 2: Do that.",
     ingredients: ["Ingredient 1", "Ingredient 2"],
     category: "Great drink",
+    alcoholic: "Alcoholic",
   };
 
   const mockOnBack = jest.fn();

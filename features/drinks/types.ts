@@ -5,4 +5,5 @@ export type Drink = {
   category: string;
   instructions: string;
   ingredients: string[];
+  alcoholic: string;
 };

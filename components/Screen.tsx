@@ -32,7 +32,7 @@ const Screen: React.FC<ScreenProps> = ({
             accessibilityLabel="Close screen"
             hitSlop={{ top: 16, bottom: 16, left: 16, right: 16 }}
           >
-            <Icon name="close" type="ionicon" size={42} color="#333333" />
+            <Icon name="close" type="ionicon" size={42} color="#383838" />
           </TouchableOpacity>
         )}
         <Text style={styles.title}>{title}</Text>

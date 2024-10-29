@@ -12,6 +12,7 @@ const convertItemToDrink = (item: any): Drink => ({
   ingredients: Object.keys(item)
     .filter((key) => key.startsWith("strIngredient") && item[key])
     .map((key) => item[key]),
+  alcoholic: item.strAlcoholic,
 });
 
 const fetchAllDrinkIdsByFirstLetter = async (
