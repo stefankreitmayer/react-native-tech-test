@@ -35,8 +35,14 @@ const Screen: React.FC<ScreenProps> = ({
             <Icon name="close" type="ionicon" size={42} color="#383838" />
           </TouchableOpacity>
         )}
-        <Text style={styles.title}>{title}</Text>
-        {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+        <Text style={styles.title} accessibilityRole="header">
+          {title}
+        </Text>
+        {subtitle && (
+          <Text style={styles.subtitle} accessibilityRole="header">
+            {subtitle}
+          </Text>
+        )}
       </View>
       <View style={styles.content}>{children}</View>
     </SafeAreaView>

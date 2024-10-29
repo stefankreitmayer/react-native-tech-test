@@ -21,7 +21,7 @@ const fetchAllDrinkIdsByFirstLetter = async (
   const response = await axios.get(
     `${API_BASE_URL}/search.php?f=${firstLetter}`,
   );
-  return response.data.drinks.slice(0, NUMBER_OF_ITEMS).map(convertItemToDrink);
+  return response.data.drinks.map(convertItemToDrink);
 };
 
 export const useFetchDrinks = (firstLetter: string = "d") => {

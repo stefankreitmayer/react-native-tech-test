@@ -2,8 +2,13 @@ import React from "react";
 import { render, screen } from "@testing-library/react-native";
 import ListScreen from "./ListScreen";
 import { useFetchDrinks } from "./hooks/useFetchDrinks";
+import { useListContext } from "../../context/ListContext";
 
 jest.mock("./hooks/useFetchDrinks");
+
+jest.mock("../../context/ListContext", () => ({
+  useListContext: jest.fn(),
+}));
 
 // Create an array of 15 drinks, enough to test the limit
 const drinks = Array.from({ length: 15 }, (_, i) => ({
@@ -15,7 +20,14 @@ const drinks = Array.from({ length: 15 }, (_, i) => ({
   ingredients: ["Ingredient 1", "Ingredient 2"],
 }));
 
+const mockOnSelectDrink = jest.fn();
+
 describe("ListScreen Component", () => {
+  (useListContext as jest.Mock).mockReturnValue({
+    itemsToShow: 10,
+    setItemsToShow: jest.fn(),
+  });
+
   it("displays a loading message when fetching data", () => {
     (useFetchDrinks as jest.Mock).mockReturnValue({
       drinks: [],
@@ -23,7 +35,9 @@ describe("ListScreen Component", () => {
       error: null,
     });
 
-    const { getByText } = render(<ListScreen />);
+    const { getByText } = render(
+      <ListScreen onSelectDrink={mockOnSelectDrink} />,
+    );
 
     expect(getByText("Loading...")).toBeTruthy();
   });
@@ -35,7 +49,9 @@ describe("ListScreen Component", () => {
       error: "Failed to load drinks",
     });
 
-    const { getByText } = render(<ListScreen />);
+    const { getByText } = render(
+      <ListScreen onSelectDrink={mockOnSelectDrink} />,
+    );
 
     expect(getByText("Failed to load drinks")).toBeTruthy();
   });
@@ -47,7 +63,9 @@ describe("ListScreen Component", () => {
       error: null,
     });
 
-    const { getByText } = render(<ListScreen />);
+    const { getByText } = render(
+      <ListScreen onSelectDrink={mockOnSelectDrink} />,
+    );
 
     expect(getByText("Drinks")).toBeTruthy();
 
@@ -63,7 +81,9 @@ describe("ListScreen Component", () => {
       error: null,
     });
 
-    const { getByText } = render(<ListScreen />);
+    const { getByText } = render(
+      <ListScreen onSelectDrink={mockOnSelectDrink} />,
+    );
 
     expect(getByText("Drinks")).toBeTruthy();
 

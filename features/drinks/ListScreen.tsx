@@ -1,8 +1,9 @@
 import React from "react";
-import { FlatList, Text, StyleSheet, Image } from "react-native";
+import { FlatList, Text, StyleSheet } from "react-native";
 import { useFetchDrinks } from "./hooks/useFetchDrinks";
 import DrinkCard from "./DrinkCard";
 import { Drink } from "./types";
+import { useListContext } from "../../context/ListContext";
 
 type ListScreenProps = {
   onSelectDrink: (drink: Drink) => void;
@@ -10,6 +11,14 @@ type ListScreenProps = {
 
 const ListScreen: React.FC<ListScreenProps> = ({ onSelectDrink }) => {
   const { drinks, loading, error } = useFetchDrinks();
+  const { itemsToShow, setItemsToShow } = useListContext();
+
+  const loadMoreItems = () => {
+    console.log(
+      `Load more items on scroll. Currently maximum ${drinks.length} items available.`,
+    );
+    setItemsToShow((prev) => prev + 10);
+  };
 
   if (loading) {
     return <Text>Loading...</Text>;
@@ -25,12 +34,14 @@ const ListScreen: React.FC<ListScreenProps> = ({ onSelectDrink }) => {
       <FlatList
         style={styles.drinksList}
         testID="drink-list"
-        data={drinks}
+        data={drinks.slice(0, itemsToShow)}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <DrinkCard drink={item} onSelectDrink={onSelectDrink} />
         )}
         contentContainerStyle={{ paddingBottom: 16 }}
+        onEndReached={loadMoreItems} // Load more on scroll
+        onEndReachedThreshold={0.5}
       />
     </>
   );

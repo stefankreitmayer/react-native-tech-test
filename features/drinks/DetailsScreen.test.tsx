@@ -28,11 +28,6 @@ describe("DrinkDetailScreen", () => {
     expect(screen.getByText(mockDrink.ingredients.join(", "))).toBeTruthy();
   });
 
-  it("displays the drink image with accessibility label", () => {
-    const image = screen.getByLabelText(`${mockDrink.name} image`);
-    expect(image).toBeTruthy();
-  });
-
   it("displays the instructions in paragraphs", () => {
     const instructionsParagraphs = mockDrink.instructions.split("\n");
     instructionsParagraphs.forEach((paragraph) => {

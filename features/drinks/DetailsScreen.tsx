@@ -19,9 +19,7 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({ drink, onBack }) => {
             source={{ uri: drink.thumbnail }}
             type={drink.alcoholic}
           />
-          <Text style={styles.ingredients} accessibilityRole="header">
-            {drink.ingredients.join(", ")}
-          </Text>
+          <Text style={styles.ingredients}>{drink.ingredients.join(", ")}</Text>
           <MultiParagraphText text={drink.instructions} />
         </>
       </ScrollView>
