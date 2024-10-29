@@ -26,13 +26,13 @@ const Screen: React.FC<ScreenProps> = ({
       <View style={styles.header}>
         {closeButtonFn && (
           <TouchableOpacity
-            style={styles.closeButton}
+            style={styles.backButton}
             onPress={closeButtonFn}
             accessibilityRole="button"
-            accessibilityLabel="Close screen"
+            accessibilityLabel="Back"
             hitSlop={{ top: 16, bottom: 16, left: 16, right: 16 }}
           >
-            <Icon name="close" type="ionicon" size={42} color="#383838" />
+            <Icon name="arrow-back" type="ionicon" size={32} color="#383838" />
           </TouchableOpacity>
         )}
         <Text style={styles.title} accessibilityRole="header">
@@ -58,26 +58,26 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#e0e0e0",
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
+  backButton: {
+    alignSelf: "flex-start",
+    marginBottom: 8,
   },
   title: {
     fontSize: 28,
     fontWeight: "bold",
     color: "#333",
+    marginBottom: 4,
   },
   subtitle: {
     fontSize: 16,
     color: "#666",
-    marginTop: 4,
   },
   content: {
     flex: 1,
     paddingHorizontal: 16,
-  },
-  closeButton: {
-    position: "absolute",
-    top: 18,
-    right: 20,
-    zIndex: 1,
   },
 });
 

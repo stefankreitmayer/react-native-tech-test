@@ -36,7 +36,7 @@ describe("DrinkDetailScreen", () => {
   });
 
   it("calls onBack when the close button is pressed", () => {
-    const closeButton = screen.getByLabelText("Close screen");
+    const closeButton = screen.getByLabelText("Back");
     fireEvent.press(closeButton);
     expect(mockOnBack).toHaveBeenCalled();
   });
