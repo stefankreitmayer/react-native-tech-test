@@ -1,12 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, View } from "react-native";
-import ListScreen from "./features/drinks/ListScreen";
+import SimpleNavigator from "./features/drinks/SimpleNavigator";
+import React from "react";
+import { ListProvider } from "./context/ListContext";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <ListScreen />
+        <ListProvider>
+          <SimpleNavigator />
+        </ListProvider>
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
