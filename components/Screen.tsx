@@ -1,5 +1,5 @@
-import { Ionicons } from "@expo/vector-icons";
 import React from "react";
+import { Icon } from "react-native-elements";
 import {
   View,
   Text,
@@ -32,7 +32,7 @@ const Screen: React.FC<ScreenProps> = ({
             accessibilityLabel="Close screen"
             hitSlop={{ top: 16, bottom: 16, left: 16, right: 16 }}
           >
-            <Ionicons name="close" size={42} color="#333333" />
+            <Icon name="close" type="ionicon" size={42} color="#333333" />
           </TouchableOpacity>
         )}
         <Text style={styles.title}>{title}</Text>
